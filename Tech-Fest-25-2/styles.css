@@ -10,6 +10,7 @@ body {
   transition: background-color 0.3s, color 0.3s;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
 /* Footer Styles */
@@ -257,10 +258,11 @@ body {
 }
 
 .visit-button:hover {
-  background-color: #FF8F00; /* Darker Orange */
+  background: #ff910024; /* Darker Orange */
   color: #000000; /* Black */
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
   transform: translateY(-2px);
+  border: 1px solid white;
 }
 
 /* Back Button */
@@ -280,7 +282,7 @@ body {
 
 /* Register Button */
 .register-button {
-  background-color: #4CAF50; /* Green */
+  background-color: #591111; /* Green */
   color: #000000; /* Black */
   border: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -354,11 +356,13 @@ body {
   text-decoration: none;
   font-size: 1.2rem;
   border-radius: 5px;
-  transition: background-color 0.3s ease;
+  transition: 0.4s  linear;
 }
 
 .cta-button:hover {
-  background-color: #E64A19; /* Darker Deep Orange */
+  background-color: #e649191a; /* Darker Deep Orange */
+  border: 1px solid white;
+  scale: 1.08;
 }
 
 /* Header Section */
@@ -451,12 +455,12 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.9); /* Black with transparency */
+  background-color: rgba(0, 0, 0, 0.651); /* Black with transparency */
   backdrop-filter: blur(10px);
   z-index: 1000;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
-  border-bottom: 2px solid #FF5722; /* Deep Orange */
+  border-bottom: 2px solid #ff56224a; /* Deep Orange */
   padding: 0 20px;
 }
 
@@ -603,7 +607,7 @@ body {
 }
 
 .event-card {
-  background-color: #000000; /* Black */
+  background-color: #171717; /* Black */
   border-radius: 15px;
   padding: 30px;
   text-align: left;
@@ -612,7 +616,7 @@ body {
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
-  border: 1px solid #333333; /* Darker border */
+  border: 1px solid #dedbdb94; /* Darker border */
 }
 
 .event-card:hover {
@@ -770,7 +774,6 @@ body {
   font-size: 1.5em;
   font-weight: 500;
 }
-
 .history-item .history-text p {
   color: #fff; /* Light Orange */
   font-size: 1.1em;
@@ -798,8 +801,8 @@ body {
 .explore-button {
   display: inline-block;
   padding: 14px 30px;
-  background-color: #FF5722; /* Deep Orange */
-  color: #FFFFFF;
+  background-color: #FF9800; /* Deep Orange */
+  color: #000000;
   text-decoration: none;
   border-radius: 8px;
   transition: all 0.3s ease-in-out;
@@ -812,8 +815,10 @@ body {
 
 .register-button:hover,
 .explore-button:hover {
-  background-color: #E64A19; /* Darker Deep Orange */
+  background-color: #e6491907; /* Darker Deep Orange */
   transform: translateY(-4px);
+  border: 1px solid white;
+  color: white;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -1000,7 +1005,7 @@ body {
 /* Enhanced Event Card Styling */
 #department-boxes .event-card,
 #tech-non-tech-events .event-card {
-  background-color: #192231;
+  background-color: #171717;
   border-radius: 12px;
   padding: 25px;
   text-align: left;
@@ -1009,7 +1014,7 @@ body {
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
-  border: 1px solid #2a4365;
+  border: 1px solid #dedbdb94;
 }
 
 #department-boxes .event-card h3,
@@ -1075,7 +1080,8 @@ body {
 }
 
 .visit-button:hover {
-  background-color: #FF5722; /* Deep Orange */
+  background-color: #ff562201; /* Deep Orange */
+  scale: 1.05;
   border: 1px solid;
   color: white;
   transform: translateY(-2px);
@@ -1089,8 +1095,8 @@ body {
 .back-button {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #333333; /* Dark Gray */
-  color: #FFA726; /* Light Orange */
+  background-color: #FFA726; /* Dark Gray */
+  color: black; /* Light Orange */
   text-decoration: none;
   border-radius: 8px;
   transition: all 0.3s ease-in-out;
@@ -1105,7 +1111,7 @@ body {
 }
 
 .back-button:hover {
-  background-color: #555555; /* Medium Gray */
+  background-color: #55555500; /* Medium Gray */
   border: 2px solid;
   color: white;
   transform: translateY(-2px);
