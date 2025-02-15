@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tech-Fest 2025</title>
+        <link rel="stylesheet" href="styles.css" />
+
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Space+Grotesk:wght@300..700&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+          rel="stylesheet"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.rings.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
+        <link rel="stylesheet" href="glitch.css" />
+      </head>
+      <body>
+        <!-- Header Section -->
+        <section class="hero" id="hero">
+          <div class="hero-content">
+            <img src="inspire in white.png" alt="Logo" class="hero-logo">
+
+            <p></p>
+            <a href="#events" class="cta-button">Explore Events</a>
+
+          </div>
+
+          <!-- First Video (plays continuously in loop) -->
+          <video id="first-video" autoplay muted loop class="hero-video">
+            <source src="hero.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </section>
+
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+          <ul class="navbar_menu">
+            <li class="navbar_item">
+              <a href="#hero" class="navbar_link">
+                <i class="fa fa-home" aria-hidden="true"></i>
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="navbar_item">
+              <a href="#events" class="navbar_link">
+                <i class="fa fa-tasks" aria-hidden="true"></i>
+                <span>Events</span>
+              </a>
+            </li>
+            <li class="navbar_item">
+              <a href="#schedule" class="navbar_link">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                <span>Schedule</span>
+              </a>
+            </li>
+            <li class="navbar_item">
+              <a href="#history" class="navbar_link">
+                <i class="fa fa-history" aria-hidden="true"></i>
+                <span>History</span>
+              </a>
+            </li>
+            <li class="navbar_item">
+              <a href="#sponsors" class="navbar_link">
+                <i class="fa fa-usd" aria-hidden="true"></i>
+                <span>Sponsor</span>
+              </a>
+            </li>
+            <li class="navbar_item">
+              <a href="#footerL" class="navbar_link">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <span>About</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="content">
+          <!-- Events Section -->
+          <section class="events" id="events">
+            <h2>Explore Our Events</h2>
+            <p>
+              Join us at Inspire '25, the ultimate tech fest where innovation
+              meets inspiration. This year, we're bringing together industry
+              leaders, tech enthusiasts, and passionate creators to explore
+              cutting-edge technologies, groundbreaking ideas, and future
+              trends.
+            </p>
+
+            <!-- Department Boxes -->
+            <div id="department-boxes" class="events-grid">
+              <div class="event-card">
+                <h3>Computer &amp; IT Department</h3>
+                <p>
+                  Explore events related to computer science and engineering.
+                </p>
+                <button
+                  class="visit-button"
+                  onclick="showTechNonTech('computer'); event.stopPropagation();"
+                >
+                  Visit <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+              <div class="event-card">
+                <h3>Electrical / EC Department</h3>
+                <p>
+                  Engage in events concerning electrical and electronics engineering.
+                </p>
+                <button
+                  class="visit-button"
+                  onclick="showTechNonTech('electrical'); event.stopPropagation();"
+                >
+                  Visit <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+              <div class="event-card">
+                <h3>Humanity &amp; Applied Science</h3>
+                <p>
+                  Participate in events about Humanity and science.
+                </p>
+                <button
+                  class="visit-button"
+                  onclick="showTechNonTech('humanity'); event.stopPropagation();"
+                >
+                  Visit <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+              <div class="event-card">
+                <h3>Civil Department</h3>
+                <p>
+                  Engage in events concerning civil engineering and
+                  infrastructure.
+                </p>
+                <button
+                  class="visit-button"
+                  onclick="showTechNonTech('civil'); event.stopPropagation();"
+                >
+                  Visit <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+              <div class="event-card">
+                <h3>Mechanical Department</h3>
+                <p>
+                  Participate in events about mechanical engineering and design.
+                </p>
+                <button
+                  class="visit-button"
+                  onclick="showTechNonTech('mechanical'); event.stopPropagation();"
+                >
+                  Visit <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+              <div class="event-card">
+                <h3>Pharmacy Department</h3>
+                <p>
+                  Participate in events about Pharmacy.
+                </p>
+                <button
+                  class="visit-button"
+                  onclick="showTechNonTech('pharmacy'); event.stopPropagation();"
+                >
+                  Visit <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Tech and Non-Tech Event Boxes -->
+            <div
+              id="tech-non-tech-events"
+              class="events-grid"
+              style="display: none"
+            >
+              <button class="back-button" onclick="showDepartmentBoxes()">
+                <i class="fas fa-arrow-left"></i> Back
+              </button>
+
+              <!-- Tech and Non-Tech Event Cards for Each Department -->
+              <div
+                class="event-card"
+                data-department="computer"
+                data-event-type="tech"
+              >
+                <h3>Computer &amp; IT - Tech Events</h3>
+                <p>Explore tech events by Computer &amp; IT Department.</p>
+                <button
+                  class="visit-button"
+                  onclick="showEvents('computer', 'tech'); event.stopPropagation();"
+                >
+                  Visit <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+              <div
+                class="event-card"
+                data-department="electrical"
+                data-event-type="tech"
+              >
+                <h3>Electrical / EC - Tech Events</h3>
+                <p>Explore tech events by Electrical / EC Department.</p>
+                <button
+                  class="visit-button"
+                  onclick="showEvents('electrical', 'tech'); event.stopPropagation();"
+                >
+                  Visit <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+              <div
+                class="event-card"
+                data-department="humanity"
+                data-event-type="non-tech"
+              >
+                <h3>Humanity &amp; Applied Science - Non-Tech Events</h3>
+                <p>
+                  Explore non-tech events by Humanity &amp; Applied Science
+                  Department.
+                </p>
+                <button
+                  class="visit-button"
+                  onclick="showEvents('humanity', 'non-tech'); event.stopPropagation();"
+                >
+                  Visit <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+              <div class="event-card" data-department="civil" data-event-type="tech">
+                <h3>Civil - Tech Events</h3>
+                <p>Explore tech events by Civil Department.</p>
+                <button
+                  class="visit-button"
+                  onclick="showEvents('civil', 'tech'); event.stopPropagation();"
+                >
+                  Visit <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+              <div
+                class="event-card"
+                data-department="civil"
+                data-event-type="non-tech"
+              >
+                <h3>Civil - Non-Tech Events</h3>
+                <p>Explore non-tech events by Civil Department.</p>
+                <button
+                  class="visit-button"
+                  onclick="showEvents('civil', 'non-tech'); event.stopPropagation();"
+                >
+                  Visit <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+              <div
+                class="event-card"
+                data-department="mechanical"
+                data-event-type="tech"
+              >
+                <h3>Mechanical - Tech Events</h3>
+                <p>Explore tech events by Mechanical Department.</p>
+                <button
+                  class="visit-button"
+                  onclick="showEvents('mechanical', 'tech'); event.stopPropagation();"
+                >
+                  Visit <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+              <div
+                class="event-card"
+                data-department="mechanical"
+                data-event-type="non-tech"
+              >
+                <h3>Mechanical - Non-Tech Events</h3>
+                <p>Explore non-tech events by Mechanical Department.</p>
+                <button
+                  class="visit-button"
+                  onclick="showEvents('mechanical', 'non-tech'); event.stopPropagation();"
+                >
+                  Visit <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+              <div
+                class="event-card"
+                data-department="pharmacy"
+                data-event-type="non-tech"
+              >
+                <h3>Pharmacy - Non-Tech Events</h3>
+                <p>Explore non-tech events by Pharmacy Department.</p>
+                <button
+                  class="visit-button"
+                  onclick="showEvents('pharmacy', 'non-tech'); event.stopPropagation();"
+                >
+                  Visit <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Tech Events -->
+            <div
+              id="computer-tech-events"
+              class="events-grid"
+              style="display: none"
+            >
+              <button class="back-button" onclick="showTechNonTech('computer')">
+                <i class="fas fa-arrow-left"></i> Back
+              </button>
+              <div class="event-card">
+                <h3>C-Quiz</h3>
+                <p>
+                  A challenging quiz testing coding, logic, and computer knowledge.
+                </p>
+                <a href="c-quiz-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>Techno Theatre Thrive</h3>
+                <p>
+                  A fusion of technology and drama in storytelling.
+                </p>
+                <a href="techno-theatre-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>LAN Gaming</h3>
+                <p>
+                  Competitive multiplayer gaming battle in a LAN-based setup.
+                </p>
+                <a href="lan-gaming-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>Shark Tank</h3>
+                <p>
+                  Pitch innovative ideas to judges and secure funding.
+                </p>
+                <a href="shark-tank-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>Relay Coding</h3>
+                <p>
+                  Team-based coding competition with sequential problem-solving.
+                </p>
+                <a href="relay-coding-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>E-Treasure Hunt</h3>
+                <p>
+                  Online puzzle-solving adventure with clues and challenges.
+                </p>
+                <a href="e-treasure-hunt-details.html" class="register-button">Register Now</a>
+              </div>
+            </div>
+
+            <div
+              id="electrical-tech-events"
+              class="events-grid"
+              style="display: none"
+            >
+              <button
+                class="back-button"
+                onclick="showTechNonTech('electrical')"
+              >
+                <i class="fas fa-arrow-left"></i> Back
+              </button>
+              <div class="event-card">
+                <h3>Rays of Hope</h3>
+                <p>
+                  Experiment with light, lasers, and electrical circuits.
+                </p>
+                <a href="rays-of-hope-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>Robo Maze</h3>
+                <p>
+                  Navigate robots through obstacles using programming and AI.
+                </p>
+                <a href="robo-maze-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>Poster Presentation</h3>
+                <p>
+                  Showcase research ideas and innovations via informative posters.
+                </p>
+                <a href="poster-presentation-details.html" class="register-button">Register Now</a>
+              </div>
+            </div>
+
+            <div
+              id="civil-tech-events"
+              class="events-grid"
+              style="display: none"
+            >
+              <button class="back-button" onclick="showTechNonTech('civil')">
+                <i class="fas fa-arrow-left"></i> Back
+              </button>
+              <div class="event-card">
+                <h3>Bob the Builder</h3>
+                <p>
+                  Structural building challenge using engineering concepts.
+                </p>
+                <a href="bob-the-builder-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>Spark of Poster</h3>
+                <p>
+                  Create visually appealing posters on civil engineering topics.
+                </p>
+                <a href="spark-of-poster-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>Hydro Maze</h3>
+                <p>
+                  Water flow and hydraulics-based engineering challenge.
+                </p>
+                <a href="hydro-maze-details.html" class="register-button">Register Now</a>
+              </div>
+            </div>
+
+            <div
+              id="mechanical-tech-events"
+              class="events-grid"
+              style="display: none"
+            >
+              <button
+                class="back-button"
+                onclick="showTechNonTech('mechanical')"
+              >
+                <i class="fas fa-arrow-left"></i> Back
+              </button>
+              <div class="event-card">
+                <h3>Clash of CAD</h3>
+                <p>
+                  3D design competition using CAD software.
+                </p>
+                <a href="clash-of-cad-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>Revolutionary Thinkers</h3>
+                <p>
+                  Present breakthrough mechanical engineering ideas and innovations.
+                </p>
+                <a href="revolutionary-thinkers-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>The Junkyard Innovators</h3>
+                <p>
+                  Build working models using scrap materials.
+                </p>
+                <a href="junkyard-innovators-details.html" class="register-button">Register Now</a>
+              </div>
+            </div>
+
+            <!-- Non-Tech Events -->
+            <div
+              id="humanity-non-tech-events"
+              class="events-grid"
+              style="display: none"
+            >
+              <button
+                class="back-button"
+                onclick="showTechNonTech('humanity')"
+              >
+                <i class="fas fa-arrow-left"></i> Back
+              </button>
+              <div class="event-card">
+                <h3>Battle of Creation</h3>
+                <p>
+                  Creative competition involving art, design, and storytelling.
+                </p>
+                <a href="battle-of-creation-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>Human Foosball</h3>
+                <p>
+                  Life-sized foosball game with real players controlling movement.
+                </p>
+                <a href="human-foosball-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>Hurdle Race</h3>
+                <p>
+                  Obstacle-based race testing speed, agility, and endurance.
+                </p>
+                <a href="hurdle-race-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>Stock Market</h3>
+                <p>
+                  Simulated trading challenge with virtual stocks and market analysis.
+                </p>
+                <a href="stock-market-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>IPL Auction</h3>
+                <p>
+                  Strategic cricket team bidding competition like the IPL auctions.
+                </p>
+                <a href="ipl-auction-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>Spot On Games</h3>
+                <p>
+                  Fun, engaging non-certificate games testing reflexes and skills.
+                </p>
+                <a href="spot-on-games-details.html" class="register-button">Register Now</a>
+              </div>
+            </div>
+
+            <div
+              id="civil-non-tech-events"
+              class="events-grid"
+              style="display: none"
+            >
+              <button class="back-button" onclick="showTechNonTech('civil')">
+                <i class="fas fa-arrow-left"></i> Back
+              </button>
+              <div class="event-card">
+                <h3>Bhaukaal</h3>
+                <p>
+                  Competitive street play addressing social issues and awareness.
+                </p>
+                <a href="bhaukaal-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>Revolt Cup</h3>
+                <p>
+                  High-energy football tournament with intense matchups.
+                </p>
+                <a href="revolt-cup-details.html" class="register-button">Register Now</a>
+              </div>
+            </div>
+
+            <div
+              id="mechanical-non-tech-events"
+              class="events-grid"
+              style="display: none"
+            >
+              <button
+                class="back-button"
+                onclick="showTechNonTech('mechanical')"
+              >
+                <i class="fas fa-arrow-left"></i> Back
+              </button>
+              <div class="event-card">
+                <h3>Reel Revolution</h3>
+                <p>
+                  Short film-making contest on impactful themes.
+                </p>
+                <a href="reel-revolution-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>Boost Session</h3>
+                <p>
+                  Physical fitness and endurance-based challenges.
+                </p>
+                <a href="boost-session-details.html" class="register-button">Register Now</a>
+              </div>
+            </div>
+
+            <div
+              id="pharmacy-non-tech-events"
+              class="events-grid"
+              style="display: none"
+            >
+              <button
+                class="back-button"
+                onclick="showTechNonTech('pharmacy')"
+              >
+                <i class="fas fa-arrow-left"></i> Back
+              </button>
+              <div class="event-card">
+                <h3>Fortune Wheel</h3>
+                <p>
+                  Quiz-based game of luck and pharmaceutical knowledge.
+                </p>
+                <a href="fortune-wheel-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>Market Minds</h3>
+                <p>
+                  Business and marketing strategy competition.
+                </p>
+                <a href="market-minds-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>Treasure Hunt</h3>
+                <p>
+                  Clue-based hunt across different locations.
+                </p>
+                <a href="treasure-hunt-details.html" class="register-button">Register Now</a>
+              </div>
+              <div class="event-card">
+                <h3>Courtroom</h3>
+                <p>
+                  Mock trial event testing legal and debating skills.
+                </p>
+                <a href="courtroom-details.html" class="register-button">Register Now</a>
+              </div>
+            </div>
+          </section>
+
+          <!-- Schedule Section -->
+          <section class="schedule-section" id="schedule">
+            <h2>Event Schedule</h2>
+
+            <!-- Tech Events Schedule -->
+            <h3>Tech Events</h3>
+            <table class="schedule-table">
+              <thead >
+                <tr>
+                  <th>Event Name</th>
+                  <th>Date</th>
+                  <th>Start Time</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Hackathon</td>
+                  <td>March 10, 2025</td>
+                  <td>10:00 AM</td>
+                  <td>A 24-hour coding marathon.</td>
+                </tr>
+                <tr>
+                  <td>AI Workshop</td>
+                  <td>March 10, 2025</td>
+                  <td>2:00 PM</td>
+                  <td>Hands-on session on neural networks.</td>
+                </tr>
+                <tr>
+                  <td>Cybersecurity CTF</td>
+                  <td>March 11, 2025</td>
+                  <td>9:30 AM</td>
+                  <td>Test your hacking skills.</td>
+                </tr>
+                <tr>
+                  <td>Robotics Challenge</td>
+                  <td>March 11, 2025</td>
+                  <td>1:00 PM</td>
+                  <td>Build and program robots.</td>
+                </tr>
+                <tr>
+                  <td>Web Development</td>
+                  <td>March 12, 2025</td>
+                  <td>11:00 AM</td>
+                  <td>Learn to build responsive websites.</td>
+                </tr>
+                <tr>
+                  <td>Game Development</td>
+                  <td>March 12, 2025</td>
+                  <td>3:00 PM</td>
+                  <td>Create a game from scratch.</td>
+                </tr>
+                <tr>
+                  <td>Blockchain Seminar</td>
+                  <td>March 13, 2025</td>
+                  <td>10:30 AM</td>
+                  <td>Explore blockchain technology.</td>
+                </tr>
+                <tr>
+                  <td>IoT Workshop</td>
+                  <td>March 13, 2025</td>
+                  <td>2:30 PM</td>
+                  <td>Build smart devices.</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Non-Tech Events Schedule -->
+            <h3>Non-Tech Events</h3>
+            <table class="schedule-table">
+              <thead>
+                <tr>
+                  <th>Event Name</th>
+                  <th>Date</th>
+                  <th>Start Time</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Photography Contest</td>
+                  <td>March 14, 2025</td>
+                  <td>10:00 AM</td>
+                  <td>Capture moments and showcase creativity.</td>
+                </tr>
+                <tr>
+                  <td>Drama Competition</td>
+                  <td>March 14, 2025</td>
+                  <td>12:30 PM</td>
+                  <td>Show off acting skills.</td>
+                </tr>
+                <tr>
+                  <td>Music Competition</td>
+                  <td>March 14, 2025</td>
+                  <td>1:30 PM</td>
+                  <td>Show off music skills.</td>
+                </tr>
+                <tr>
+                  <td>Cooking Contest</td>
+                  <td>March 15, 2025</td>
+                  <td>10:00 AM</td>
+                  <td>Prepare delicious dishes.</td>
+                </tr>
+                <tr>
+                  <td>Fashion Show</td>
+                  <td>March 15, 2025</td>
+                  <td>1:30 PM</td>
+                  <td>Display fashion creations.</td>
+                </tr>
+                <tr>
+                  <td>Stand-up Comedy</td>
+                  <td>March 15, 2025</td>
+                  <td>3:30 PM</td>
+                  <td>Make the audience laugh.</td>
+                </tr>
+                <tr>
+                  <td>Debate Competition</td>
+                  <td>March 16, 2025</td>
+                  <td>11:00 AM</td>
+                  <td>Engage in an intellectual debate.</td>
+                </tr>
+                <tr>
+                  <td>Dance Battle</td>
+                  <td>March 16, 2025</td>
+                  <td>2:00 PM</td>
+                  <td>Showcase dancing talent.</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- History Section -->
+          <section id="history" class="history-section">
+            <h2>The Evolution of Computers</h2>
+
+            <!-- First Generation (1940-1956) -->
+            <div class="history-item">
+              <div class="history-text">
+                <h3>1st Generation (1940-1956) - Vacuum Tubes</h3>
+                <p>
+                  Technology Used: Vacuum tubes for circuitry, magnetic drums
+                  for memory Characteristics: Large, expensive, consumed a lot
+                  of power, generated heat Programming Language: Machine
+                  language (binary) Examples: ENIAC, UNIVAC-I Usage:
+                  Scientific calculations, military applications
+                </p>
+              </div>
+              <div class="history-img">
+                <img src="Photos/1.webp" alt="First Generation Computer" />
+              </div>
+            </div>
+
+            <!-- Second Generation (1956-1963) -->
+            <div class="history-item history-reverse">
+
+              <div class="history-text">
+                <h3>2nd Generation (1956-1963) - Transistors</h3>
+                <p>
+                  Technology Used: Transistors replaced vacuum tubes
+                  Characteristics: Smaller, faster, more reliable,
+                  energy-efficient Programming Language: Assembly language,
+                  early high-level languages (COBOL, FORTRAN) Examples: IBM
+                  1401, UNIVAC 1108 Usage: Business applications, scientific
+                  computing
+                </p>
+              </div>
+              <div class="history-img">
+                <img src="Photos/2.webp" alt="Second Generation Computer" />
+              </div>
+            </div>
+
+            <!-- Third Generation (1964-1971) -->
+            <div class="history-item">
+              <div class="history-text">
+                <h3>3rd Generation (1964-1971) - Integrated Circuits (ICs)</h3>
+                <p>
+                  Technology Used: Integrated Circuits (ICs) replaced
+                  transistors Characteristics: Smaller size, better processing
+                  speed, lower cost Programming Language: High-level languages
+                  like C and BASIC Examples: IBM 360 series, PDP-8
+                </p>
+              </div>
+              <div class="history-img">
+                <img src="Photos/3.webp" alt="Third Generation Computer" />
+              </div>
+            </div>
+
+            <!-- Fourth Generation (1971-Present) -->
+            <div class="history-item history-reverse">
+
+              <div class="history-text">
+                <h3>4th Generation (1971-Present) - Microprocessors</h3>
+                <p>
+                  Technology Used: Microprocessors (thousands of ICs on a
+                  single chip) Characteristics: Personal computers (PCs) became
+                  common, graphical user interfaces (GUIs) Programming
+                  Language: C, C++, Java, Python Examples: Intel 4004, IBM PC,
+                  Apple Macintosh Usage: Office applications, entertainment,
+                  internet
+                </p>
+              </div>
+              <div class="history-img">
+                <img src="Photos/4.webp" alt="Fourth Generation Computer" />
+              </div>
+            </div>
+
+            <!-- Fifth Generation (Present & Beyond) -->
+            <div class="history-item">
+              <div class="history-text">
+                <h3>
+                  5th Generation (Present & Beyond) - Artificial Intelligence
+                  (AI) and Quantum Computing
+                </h3>
+                <p>
+                  Technology Used: AI, machine learning, quantum computing,
+                  nanotechnology Characteristics: Self-learning systems,
+                  advanced parallel processing, cloud computing Programming
+                  Language: Python, R, AI-based languages like Prolog, Lisp
+                  Examples: IBM Watson, Google's Quantum Computer Usage:
+                  AI-based decision-making, robotics, cloud computing, voice
+                  recognition
+                </p>
+              </div>
+              <div class="history-img">
+                <img src="Photos/5.webp" alt="Fifth Generation Computer" />
+              </div>
+            </div>
+
+            <!-- Sixth Generation (Future & Beyond) -->
+            <div class="history-item history-reverse">
+
+              <div class="history-text">
+                <h3>6th Generation (Future & Beyond) - AI, Quantum & Beyond</h3>
+                <p>
+                  Technology Used: Quantum computing, artificial intelligence
+                  (AGI), nanotechnology, optical computing Characteristics:
+                  Self-learning AI, ultra-fast quantum processing,
+                  human-brain-like computing, energy-efficient systems
+                  Programming Language: Python, R, Q# (Quantum), Prolog, Lisp
+                  Examples: Google's Quantum Supremacy, IBM's Q System One,
+                  AI-driven robotics Usage: AI-powered automation, fully
+                  autonomous robots, real-time global decision-making, medical
+                  advancements, space exploration
+                </p>
+              </div>
+              <div class="history-img">
+                <img src="Photos/6(1).webp" alt="Sixth Generation Computer" />
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Sponsor Section -->
+        <section class="sponsors" id="sponsors">
+          <h2>Our Sponsors</h2>
+          <div class="sponsors-grid">
+            <img src="CKPCEt.png" alt="Sponsor 1" />
+            <img src="CKPCEt.png" alt="Sponsor 2" />
+            <img src="CKPCEt.png" alt="Sponsor 3" />
+            <img src="CKPCEt.png" alt="Sponsor 4" />
+            <img src="CKPCEt.png" alt="Sponsor 5" />
+            
+          </div>
+        </section>
+
+        <!-- Footer Section -->
+        <footer class="footer" id="footerL">
+          <div class="footer-container">
+            <div class="footer-logos">
+              <img src="trust.png" alt="Navyug Vidyabhavan Trust Logo" style="transform: rotate(-90deg); height: 140px;" />
+              <img src="CKPCEt.png" alt="CKPCET Logo" style="height: 140px;"/>
+              <img src="ckpipsir.png" alt="CKPIPSR Logo" style="height: 140px;" />
+            </div>
+
+            <div class="footer-content">
+              <div class="footer-column">
+                <div class="footer-right">
+                  <h3>Tech-Fest Faculty Coordinators</h3>
+                  <ul>
+                    <p>DR. SAURABH S. TANDEL</p>
+                    <p>DR. RITESHKUMAR MOHANBHAI PATEL</p>  
+                    <p>PROF. KAPIL K. PATEL</p>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="footer-column">
+                <div class="footer-right">
+                  <h3>General Secretaries (GS):</h3>
+                  <p>Kartik Shinde</p>
+                  <p>Keya Patel</p>
+                  <br>
+
+                  <h3>Tech-Fest Organizing Team</h3>
+                  <p style="color: #ffffff"><b>Technical Secretaries:</b></p>
+                  <p>Meet Moliya</p>
+                  <p>Mahi Vankawala</p>
+                  <p>Ajinkya Awachar</p>
+                  <p>Ansh</p>
+                </div>
+              </div>
+               <div class="footer-column">
+                <div class="footer-dev">
+                  <h3>Website Crafted By</h3>
+                  <ul>
+                    <p>Kevin Patel</p>
+                    <p>Tattvam Kajavadara</p>
+                    <p>Pratham Tailor</p>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <p>© CKPCET 2025 | All Rights Reserved</p>
+
+          </div>
+        </footer>
+
+        <script src="index-script.js"></script>
+        <script src="script.js"></script>
+      </body>
+    </html>
