@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fortune Wheel Details</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.fog.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background-color: #1e293b;
+      color: #f9fafb;
+      line-height: 1.8;
+      margin: 0;
+      padding: 0;
+      /* Prevent scrollbars for animation */
+    }
+
+    #vanta-fog-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; /* Place animation behind content */
+    }
+
+
+   /* Navigation Bar */
+.navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(17, 24, 39, 0.85); /* Darker transparent navbar */
+  backdrop-filter: blur(12px); /* Stronger blur */
+  z-index: 1000;
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3); /* More prominent shadow */
+  box-sizing: border-box;
+  border-bottom: none; /* Removed border */
+  padding: 0 20px;
+  display: flex; /* Add flex container to navbar */
+  justify-content: center; /* Center navbar horizontally */
+}
+
+.navbar_menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  height: 65px; /* Slightly shorter navbar */
+  box-sizing: border-box;
+  justify-content: center; /* Center items horizontally inside navbar_menu */
+  max-width: 1200px; /* Limit navbar width */
+  width: 100%; /* Take full width within max-width */
+}
+
+@media (min-width: 769px) {
+  .navbar_menu {
+    justify-content: center; /* Center align navbar items on larger screens */
+  }
+  .navbar{
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar_menu {
+    flex-direction: row;
+    justify-content: flex-start; /* Keep items to the start on smaller screens if needed */
+    align-items: center;
+    height: auto;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 10px;
+    margin-left: 0; /* Reset margin */
+  }
+  
+}
+
+
+.navbar_item {
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin: 0 12px; /* Adjusted margin */
+  flex-shrink: 0;
+}
+
+.navbar_link {
+  color: #d1d5db; /* Light gray navbar links */
+  text-decoration: none;
+  padding: 8px 0; /* Reduced padding */
+  border-radius: 4px; /* Slightly rounded nav links */
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  font-family: "Fira Code", monospace; /* Monospace font for nav links */
+  font-weight: 500;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.navbar_link i {
+  margin-right: 8px; /* Adjusted icon margin */
+  transition: transform 0.8s ease-in-out; /* Faster icon rotation */
+  color: #ff7849; /* Orange icon color */
+  font-size: 1.1em; /* Slightly larger icons */
+}
+
+.navbar_link:hover i {
+  transform: rotate(360deg) scale(1.1); /* Scale up icon on hover */
+}
+
+.navbar_link span {
+  display: block;
+}
+
+.navbar_link::before {
+  content: "";
+  position: absolute;
+  bottom: 2px; /* Closer to text */
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #ff7849; /* Vibrant orange underline */
+  transition: width 0.3s ease, left 0.3s ease;
+  z-index: 1;
+}
+
+.navbar_link:hover {
+  color: #f9fafb; /* Very light gray on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.navbar_link:hover::before {
+  width: 100%;
+  left: 0;
+}
+
+    .container {
+      width: 80%;
+      max-width: 1200px; /* Added max-width to container */
+      margin: 20px auto; /* Center container on larger screens */
+      background-color: #2d374800;
+      padding: 30px;
+      border-radius: 12px;
+      position: relative; /* Ensure content is above animation */
+    }
+
+    .event-name {
+      font-size: 2.5em;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #fc612d;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .event-details {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; /* Center event details */
+    }
+
+    .event-poster {
+      width: 30%;
+      margin-right: 20px;
+      transition: transform 0.3s ease-in-out;
+      min-width: 200px; /* Added min-width to event-poster */
+    }
+
+    .event-poster:hover {
+      transform: scale(1.05);
+    }
+
+    .event-poster img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+      border: 2px solid #ff7849;
+      box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    }
+
+    .event-info {
+      width: 65%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info-section {
+      background-color: #000000a9;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .info-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .info-section h2,
+    .info-section h3 {
+      color: #fc612d;
+      margin-bottom: 10px;
+
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    .info-section p {
+      line-height: 1.7;
+      margin-bottom: 0;
+      color: #d1d5db;
+      font-size: 1em;
+    }
+
+    a {
+      color: #ff7849;
+      text-decoration: none;
+      transition: color 0.3s ease-in-out;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: #f9fafb;
+    }
+
+    /* Back button style specifically for event details pages */
+    .back-button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #ff6f10; /* Slate gray color */
+        color: #f9fafb; /* Light text color */
+        text-decoration: none;
+        border-radius: 6px;
+        transition: background-color 0.3s ease;
+        border: none;
+        cursor: pointer;
+        font-size: 0.9em;
+        font-weight: 600;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        margin-top: 20px; /* Add some margin to the top */
+        transition: 0.3s linear;
+    }
+
+    .back-button:hover {
+        background-color: #f9fafb00; /* Light background on hover */
+        color: #ffffff; /* Slate gray text on hover */
+        border: 1px solid #ffffff; /* Slate gray border on hover */
+        scale: 1.01;
+        text-decoration: none;
+    }
+
+
+    @media (max-width: 768px) {
+      .container {
+        width: 90%; /* Take full width on mobile */
+        margin-left: auto;
+        margin-right: auto; /* Center container on mobile */
+        padding: 20px;
+      }
+
+      .event-name {
+        font-size: 2em;
+      }
+
+      .event-details {
+        flex-direction: column;
+        align-items: center; /* Center items in flex column */
+      }
+
+      .event-poster {
+        width: 100%;
+        margin-bottom: 20px;
+        margin-right: 0;
+        min-width: auto; /* Reset min-width on mobile */
+        display: flex;        /* Enable flexbox for centering */
+        justify-content: center; /* Center horizontally */
+      }
+
+      .event-poster img {
+        max-width: 90%; /* Increased image width limit on mobile */
+        height: auto;    /* Maintain aspect ratio */
+        display: block;    /* Ensure block display for margin auto to work */
+        margin-left: auto;  /* Center horizontally */
+        margin-right: auto; /* Center horizontally */
+      }
+
+      .event-info {
+        width: 100%;
+      }
+      .info-section {
+        padding: 15px; /* Reduced padding for info sections on mobile */
+      }
+      .info-section h2{
+        font-size: 1.2em; /* Further reduced h2 font size on mobile */
+      }
+      .info-section h3{
+        font-size: 1em; /* Further reduced h3 font size on mobile */
+      }
+      .info-section p{
+        font-size: 0.85em; /* Further reduced p font size on mobile */
+      }
+    }
+  </style>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Space+Grotesk:wght@300..700&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+          rel="stylesheet"
+        />
+</head>
+
+<body>
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+          <ul class="navbar_menu">
+            <li class="navbar_item">
+              <a href="index.html" class="navbar_link">
+                <i class="fa fa-home" aria-hidden="true"></i>
+                <span>Home</span>
+              </a>
+            </li>
+            <li class="navbar_item">
+              <a href="index.html#events" class="navbar_link">
+                <i class="fa fa-tasks" aria-hidden="true"></i>
+                <span>Events</span>
+              </a>
+            </li>
+            <li class="navbar_item">
+              <a href="index.html#schedule" class="navbar_link">
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                <span>Schedule</span>
+              </a>
+            </li>
+            <li class="navbar_item">
+              <a href="index.html#history" class="navbar_link">
+                <i class="fa fa-history" aria-hidden="true"></i>
+                <span>History</span>
+              </a>
+            </li>
+            <li class="navbar_item">
+              <a href="index.html#sponsors" class="navbar_link">
+                <i class="fa fa-usd" aria-hidden="true"></i>
+                <span>Sponsor</span>
+              </a>
+            </li>
+            <li class="navbar_item">
+              <a href="index.html#footerL" class="navbar_link">
+                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                <span>About</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+  <div id="vanta-fog-bg"></div>
+  <div class="container">
+    <h1 class="event-name">Fortune Wheel</h1>
+    <div class="event-details">
+      <div class="event-poster">
+        <img src="EventPages/Tech/img/c_quize.jpg" alt="C-Quiz Event">
+      </div>
+      <div class="event-info">
+        <section class="info-section">
+          <h2>About This Event</h2>
+          <p>A challenging quiz testing coding, logic, and computer knowledge.
+          </p>
+        </section>
+
+        <section class="info-section">
+          <h3>Schedule</h3>
+          <p>March 11, 2025, 2:00 PM - 4:00 PM</p>
+        </section>
+
+        <section class="info-section">
+          <h3>Location</h3>
+          <p>Room 201</p>
+        </section>
+
+        <section class="info-section">
+          <h3>Rules</h3>
+          <p>
+            <ul>
+              <li>Rule 1: Individual participation.</li>
+              <li>Rule 2: No external resources allowed.</li>
+              <li>Rule 3: Time limit of 60 minutes.</li>
+            </ul>
+          </p>
+        </section>
+
+        <section class="info-section">
+          <h3>Contact</h3>
+          <p>Coordinators: </p>
+          <p>Hetvi Desai - 7096279409</p>
+          <p>Raish Shaikh - 8511344872</p>
+        </section>
+        <a href="index.html#events" class="back-button">Back to Events</a>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      VANTA.FOG({
+        el: "#vanta-fog-bg",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        highlightColor: 0xff7849, // Vibrant orange highlight
+        midtoneColor: 0x2d3748,  // Darker card background as midtone
+        lowlightColor: 0x1e293b, // Dark navy background as lowlight
+        baseColor: 0x111827,     // Darker navy as base
+        blurFactor: 0.80,
+        zoom: 0.90
+      })
+    });
+  </script>
+        <script src="./script.js"></script>
+</body>
+
+</html>
+
