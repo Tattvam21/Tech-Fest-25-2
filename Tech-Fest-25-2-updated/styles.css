@@ -385,7 +385,12 @@ body {
 
 @media (max-width: 768px) {
   .hero-logo {
-    width: 300px;
+    width: 700px;
+  }
+  .cta-button {
+    width: 120px;
+    height: 25px;
+    font-size: 15px;
   }
   
   .hero-content{
