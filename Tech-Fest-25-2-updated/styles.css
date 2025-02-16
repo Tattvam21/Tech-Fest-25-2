@@ -387,6 +387,10 @@ body {
   .hero-logo {
     width: 300px;
   }
+  
+  .hero-content{
+    margin-left: 10px;
+  }
 }
 
 @media (max-width: 480px) {
