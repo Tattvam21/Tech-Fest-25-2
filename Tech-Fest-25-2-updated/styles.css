@@ -334,7 +334,7 @@ body {
   background-color: #ff7849; /* Vibrant orange */
   color: #f9fafb; /* Light gray text */
   padding: 15px 30px;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: 0.3s linear;
@@ -378,19 +378,21 @@ body {
 }
 
 .hero-logo {
-  width: 450px; /* Slightly smaller logo */
+  width: 630px; /* Slightly smaller logo */
   height: auto;
   margin-bottom: 10px; /* Reduced margin */
 }
 
 @media (max-width: 768px) {
   .hero-logo {
-    width: 700px;
+    width: 900px;
   }
   .cta-button {
-    width: 120px;
-    height: 25px;
-    font-size: 15px;
+    width: max-content;
+    height: max-content;
+    font-size: 1.1rem;
+    
+
   }
   
   .hero-content{
@@ -776,13 +778,13 @@ body {
   max-width: 100%;
   height: auto;
   border-radius: 8px; /* Rounded sponsor logos */
-  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Smooth transition */
-  opacity: 0.7; /* Slightly faded logos */
+  transition: 0.2s linear;
+  
 }
 
 .sponsors-grid img:hover {
   transform: scale(1.1); /* Scale up on hover */
-  opacity: 1; /* Full opacity on hover */
+  
 }
 
 
@@ -1084,8 +1086,8 @@ body {
   }
 
   .hero-logo {
-    width: 280px; /* Further reduce logo size for mobile */
-    max-width: 80%; /* Ensure logo is not too wide on small screens */
+    width: 330px; /* Further reduce logo size for mobile */
+    
   }
 
    .hero-content p {
