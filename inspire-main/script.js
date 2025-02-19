@@ -244,3 +244,16 @@ function hideAllEventGrids() {
   document.getElementById("pharmacy-non-tech-events").style.display = "none";
   document.getElementById("department-boxes").style.display = "none";
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  function isTouchDevice() {
+    return (('ontouchstart' in window) ||
+       (navigator.maxTouchPoints > 0) ||
+       (navigator.msMaxTouchPoints > 0));
+  }
+
+  if (isTouchDevice()) {
+    document.body.classList.add('touch');
+    document.body.classList.remove('no-touch');
+  }
+});
