@@ -26,67 +26,29 @@ document.addEventListener("DOMContentLoaded", () => {
 }); // 1 second delay
 
 const initializeVanta = (element) => {
-  // Vanta.js options
   const vantaOptions = {
     el: element,
     mouseControls: false,
     touchControls: true,
-    gyroControls: false,
-    minHeight: 200.0,
-    minWidth: 200.0,
-    scale: 1.0,
-    scaleMobile: 1.0,
-    backgroundColor: 0x212121, // Dark Gray
-    color: 0xffa726, // Orange
-    backgroundAlpha: 0.5,
-    ringSize: 1,
-    rotationMultiplier: 0.05,
+    
   };
 
-  // Function to safely destroy and re-initialize Vanta
-  const safeVantaInitialization = (vantaInstance, vantaOptions, vantaType) => {
-    try {
-      if (vantaInstance) {
-        vantaInstance.destroy();
-      }
-
-      // Initialize Vanta based on the specified type
-      if (vantaType === "NET") {
-        return VANTA.NET(vantaOptions);
-      } else if (vantaType === "RINGS") {
-        return VANTA.RINGS(vantaOptions);
-      } else if (vantaType === "BIRDS") {
-        return VANTA.BIRDS(vantaOptions);
-      } else {
-        console.error("Unsupported Vanta type:", vantaType);
-        return null;
-      }
-    } catch (error) {
-      console.error("Error initializing Vanta:", error);
-      return null;
-    }
-  };
-
-  if (element === "#headerL") {
-    headerNet = safeVantaInitialization(headerNet, vantaOptions, "NET");
-  } else if (element === "#events") {
-    eventsRings = safeVantaInitialization(eventsRings, vantaOptions, "RINGS");
+   if (element === "#events") {
+    if (eventsRings) eventsRings.destroy();
+    eventsRings = VANTA.RINGS(vantaOptions);
   } else if (element === "#sponsors") {
-    sponsorsRings = safeVantaInitialization(sponsorsRings, vantaOptions, "RINGS");
+    if (sponsorsRings) sponsorsRings.destroy();
+    sponsorsRings = VANTA.RINGS(vantaOptions);
   }
 
   const birdsOptionsSchedule = {
-    el: "#schedule",
+    el: "#history",
     mouseControls: false,
     touchControls: true,
     gyroControls: false,
-    minHeight: 200.0,
-    minWidth: 200.0,
-    scale: 1.0,
-    scaleMobile: 1.0,
-    backgroundColor: 0x212121, // Dark Gray
-    color: 0xffa726, // Orange
-    quantity: 3,
+    
+   
+    quantity: 4,
   };
 
   if (scheduleBirds) scheduleBirds.destroy();
@@ -97,13 +59,9 @@ const initializeVanta = (element) => {
     mouseControls: false,
     touchControls: true,
     gyroControls: false,
-    minHeight: 200.0,
-    minWidth: 200.0,
-    scale: 1.0,
-    scaleMobile: 1.0,
-    backgroundColor: 0x212121, // Dark Gray
-    color: 0xffa726, // Orange
-    quantity: 3,
+    
+   
+    quantity: 4,
   };
 
   if (historyBirds) historyBirds.destroy();
