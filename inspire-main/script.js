@@ -1,7 +1,6 @@
 let headerNet, eventsRings, scheduleBirds, historyBirds, sponsorsRings;
 
 // Get the video elements and the overlay element
-// JavaScript code for handling video and text animations
 const firstVideo = document.getElementById("first-video");
 const heroTitle = document.querySelector(".hero-title");
 const heroSlogan = document.querySelector(".hero-slogan");
@@ -10,104 +9,126 @@ const registerBtn = document.querySelector(".btn");
 // Set the animation delay for the text
 document.addEventListener("DOMContentLoaded", () => {
   if (heroTitle) {
-    heroTitle.style.opacity = "1"; // Show title after 1 second
+    heroTitle.style.opacity = "1";
     heroTitle.classList.add("fadeInUp");
   }
 
   if (heroSlogan) {
-    heroSlogan.style.opacity = "1"; // Show slogan after 1 second
+    heroSlogan.style.opacity = "1";
     heroSlogan.classList.add("fadeInUp");
   }
 
   if (registerBtn) {
-    registerBtn.style.opacity = "1"; // Show button after 1.5 seconds
+    registerBtn.style.opacity = "1";
     registerBtn.classList.add("fadeInUp");
   }
-}); // 1 second delay
 
-const initializeVanta = (element) => {
-  // Vanta.js options
-  const vantaOptions = {
-    el: element,
-    mouseControls: false,
-    touchControls: true,
-    gyroControls: false,
-    minHeight: 200.0,
-    minWidth: 200.0,
-    scale: 1.0,
-    scaleMobile: 1.0,
-    backgroundColor: 0x212121, // Dark Gray
-    color: 0xffa726, // Orange
-    backgroundAlpha: 0.5,
-    ringSize: 1,
-    rotationMultiplier: 0.05,
-  };
+  // Initialize Vanta after DOM is loaded
+  initializeVanta("#hero");
+  initializeVanta("#events");
+  initializeVanta("#sponsors");
+});
 
-  // Function to safely destroy and re-initialize Vanta
-  const safeVantaInitialization = (vantaInstance, vantaOptions, vantaType) => {
-    try {
-      if (vantaInstance) {
-        vantaInstance.destroy();
-      }
+const initializeVanta = async (element) => {
+  try {
+    // Dynamically import Vanta.js and its effects
+    await Promise.all([
+      import("https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js").then(() => {
+        console.log("VANTA.NET loaded");
+      }),
+      import("https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.rings.min.js").then(() => {
+        console.log("VANTA.RINGS loaded");
+      }),
+      import("https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js").then(() => {
+        console.log("VANTA.BIRDS loaded");
+      }),
+    ]);
 
-      // Initialize Vanta based on the specified type
-      if (vantaType === "NET") {
-        return VANTA.NET(vantaOptions);
-      } else if (vantaType === "RINGS") {
-        return VANTA.RINGS(vantaOptions);
-      } else if (vantaType === "BIRDS") {
-        return VANTA.BIRDS(vantaOptions);
-      } else {
-        console.error("Unsupported Vanta type:", vantaType);
+    // Vanta.js options
+    const vantaOptions = {
+      el: element,
+      mouseControls: false,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.0,
+      minWidth: 200.0,
+      scale: 1.0,
+      scaleMobile: 1.0,
+      backgroundColor: 0x212121,
+      color: 0xffa726,
+      backgroundAlpha: 0.5,
+      ringSize: 1,
+      rotationMultiplier: 0.05,
+    };
+
+    // Function to safely destroy and re-initialize Vanta
+    const safeVantaInitialization = (vantaInstance, vantaOptions, vantaType) => {
+      try {
+        if (vantaInstance) {
+          vantaInstance.destroy();
+        }
+
+        // Initialize Vanta based on the specified type
+        if (vantaType === "NET") {
+          return VANTA.NET(vantaOptions);
+        } else if (vantaType === "RINGS") {
+          return VANTA.RINGS(vantaOptions);
+        } else if (vantaType === "BIRDS") {
+          return VANTA.BIRDS(vantaOptions);
+        } else {
+          console.error("Unsupported Vanta type:", vantaType);
+          return null;
+        }
+      } catch (error) {
+        console.error("Error initializing Vanta:", error);
         return null;
       }
-    } catch (error) {
-      console.error("Error initializing Vanta:", error);
-      return null;
+    };
+
+    if (element === "#hero") {
+      headerNet = safeVantaInitialization(headerNet, vantaOptions, "NET");
+    } else if (element === "#events") {
+      eventsRings = safeVantaInitialization(eventsRings, vantaOptions, "RINGS");
+    } else if (element === "#sponsors") {
+      sponsorsRings = safeVantaInitialization(sponsorsRings, vantaOptions, "RINGS");
     }
-  };
 
-  if (element === "#hero") {
-    headerNet = safeVantaInitialization(headerNet, vantaOptions, "NET");
-  } else if (element === "#events") {
-    eventsRings = safeVantaInitialization(eventsRings, vantaOptions, "RINGS");
-  } else if (element === "#sponsors") {
-    sponsorsRings = safeVantaInitialization(sponsorsRings, vantaOptions, "RINGS");
+    const birdsOptionsSchedule = {
+      el: "#schedule",
+      mouseControls: false,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.0,
+      minWidth: 200.0,
+      scale: 1.0,
+      scaleMobile: 1.0,
+      backgroundColor: 0x212121,
+      color: 0xffa726,
+      quantity: 3,
+    };
+
+    if (scheduleBirds) scheduleBirds.destroy();
+    scheduleBirds = VANTA.BIRDS(birdsOptionsSchedule);
+
+    const birdsOptionsHistory = {
+      el: "#history",
+      mouseControls: false,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.0,
+      minWidth: 200.0,
+      scale: 1.0,
+      scaleMobile: 1.0,
+      backgroundColor: 0x212121,
+      color: 0xffa726,
+      quantity: 3,
+    };
+
+    if (historyBirds) historyBirds.destroy();
+    historyBirds = VANTA.BIRDS(birdsOptionsHistory);
+  } catch (error) {
+    console.error("Error loading Vanta.js:", error);
   }
-
-  const birdsOptionsSchedule = {
-    el: "#schedule",
-    mouseControls: false,
-    touchControls: true,
-    gyroControls: false,
-    minHeight: 200.0,
-    minWidth: 200.0,
-    scale: 1.0,
-    scaleMobile: 1.0,
-    backgroundColor: 0x212121, // Dark Gray
-    color: 0xffa726, // Orange
-    quantity: 3,
-  };
-
-  if (scheduleBirds) scheduleBirds.destroy();
-  scheduleBirds = VANTA.BIRDS(birdsOptionsSchedule);
-
-  const birdsOptionsHistory = {
-    el: "#history",
-    mouseControls: false,
-    touchControls: true,
-    gyroControls: false,
-    minHeight: 200.0,
-    minWidth: 200.0,
-    scale: 1.0,
-    scaleMobile: 1.0,
-    backgroundColor: 0x212121, // Dark Gray
-    color: 0xffa726, // Orange
-    quantity: 3,
-  };
-
-  if (historyBirds) historyBirds.destroy();
-  historyBirds = VANTA.BIRDS(birdsOptionsHistory);
 };
 
 function toggleEvents() {
@@ -223,9 +244,3 @@ function hideAllEventGrids() {
   document.getElementById("pharmacy-non-tech-events").style.display = "none";
   document.getElementById("department-boxes").style.display = "none";
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  initializeVanta("#hero");
-  initializeVanta("#events");
-  initializeVanta("#sponsors");
-});
