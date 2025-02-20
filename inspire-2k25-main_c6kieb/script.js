@@ -41,15 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
     resize();
   });
 
- // Gyroscope implementation
- window.addEventListener("deviceorientation", function (event) {
-  const tiltX = event.beta;  // Beta: Rotation around the X axis (-180 to 180 degrees)
-  const tiltY = event.gamma; // Gamma: Rotation around the Y axis (-90 to 90 degrees)
 
-  // Adjust velocity based on tilt
-  velocity.tx = tiltY / 11; // Reduced sensitivity
-  velocity.ty = tiltX / 10; // Reduced sensitivity
-});
 
 
 
