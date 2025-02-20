@@ -189,6 +189,227 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  /*** 🌟 PARTICLE ANIMATION FOR SCHEDULE SECTION WITH TRAILS 🌟 ***/
+  const SCHEDULE_STAR_COLOR = "#fff";
+  let SCHEDULE_STAR_SIZE = 3;
+  const SCHEDULE_STAR_MIN_SCALE = 0.2;
+  const SCHEDULE_OVERFLOW_THRESHOLD = 50;
+  let SCHEDULE_STAR_COUNT = (window.innerWidth + window.innerHeight) / 8;
+
+  const scheduleCanvas = document.querySelector("#schedule-animation");
+  const scheduleContext = scheduleCanvas.getContext("2d");
+
+  let scheduleScale = window.devicePixelRatio || 1;
+  let scheduleWidth, scheduleHeight;
+
+  let scheduleStars = [];
+
+  let schedulePointerX = window.innerWidth / 2;
+  let schedulePointerY = window.innerHeight / 2;
+
+  let scheduleVelocity = { x: 0, y: 0, tx: 0, ty: 0, z: 0.0005 };
+  let scheduleTouchInput = false;
+
+  // Function to adjust star size based on screen density
+  function adjustScheduleStarSize() {
+    if (window.innerWidth <= 768) {
+      // Adjust star size and count for smaller screens
+      SCHEDULE_STAR_SIZE = 2;
+      SCHEDULE_STAR_COUNT = (window.innerWidth + window.innerHeight) / 7;
+    } else {
+      SCHEDULE_STAR_SIZE = 3;
+      SCHEDULE_STAR_COUNT = (window.innerWidth + window.innerHeight) / 8;
+    }
+  }
+
+  generateScheduleStars();
+  resizeScheduleCanvas();
+  stepScheduleAnimation();
+
+  window.addEventListener("resize", () => {
+    adjustScheduleStarSize();
+    resizeScheduleCanvas();
+  });
+
+  window.addEventListener("mousemove", onScheduleMouseMove);
+  scheduleCanvas.addEventListener("touchmove", onScheduleTouchMove);
+  scheduleCanvas.addEventListener("touchend", onScheduleMouseLeave);
+  document.addEventListener("mouseleave", onScheduleMouseLeave);
+
+  function generateScheduleStars() {
+    scheduleStars = [];
+    adjustScheduleStarSize();
+    for (let i = 0; i < SCHEDULE_STAR_COUNT; i++) {
+      scheduleStars.push({
+        x: Math.random() * scheduleWidth,
+        y: Math.random() * scheduleHeight,
+        z: SCHEDULE_STAR_MIN_SCALE + Math.random() * (1 - SCHEDULE_STAR_MIN_SCALE),
+      });
+    }
+  }
+
+  function placeScheduleStar(star) {
+    star.x = Math.random() * scheduleWidth;
+    star.y = Math.random() * scheduleHeight;
+  }
+
+  function recycleScheduleStar(star) {
+    let direction = "z";
+    let vx = Math.abs(scheduleVelocity.x);
+    let vy = Math.abs(scheduleVelocity.y);
+
+    if (vx > 1 || vy > 1) {
+      let axis = vx > vy ? (Math.random() < vx / (vx + vy) ? "h" : "v") : (Math.random() < vy / (vx + vy) ? "v" : "h");
+
+      if (axis === "h") {
+        direction = scheduleVelocity.x > 0 ? "l" : "r";
+      } else {
+        direction = scheduleVelocity.y > 0 ? "t" : "b";
+      }
+    }
+
+    star.z = SCHEDULE_STAR_MIN_SCALE + Math.random() * (1 - SCHEDULE_STAR_MIN_SCALE);
+
+    if (direction === "z") {
+      star.z = 0.1;
+      star.x = Math.random() * scheduleWidth;
+      star.y = Math.random() * scheduleHeight;
+    } else if (direction === "l") {
+      star.x = -SCHEDULE_OVERFLOW_THRESHOLD;
+      star.y = scheduleHeight * Math.random();
+    } else if (direction === "r") {
+      star.x = scheduleWidth + SCHEDULE_OVERFLOW_THRESHOLD;
+      star.y = scheduleHeight * Math.random();
+    } else if (direction === "t") {
+      star.x = scheduleWidth * Math.random();
+      star.y = -SCHEDULE_OVERFLOW_THRESHOLD;
+    } else if (direction === "b") {
+      star.x = scheduleWidth * Math.random();
+      star.y = scheduleHeight + SCHEDULE_OVERFLOW_THRESHOLD;
+    }
+  }
+
+  function resizeScheduleCanvas() {
+    scheduleScale = window.devicePixelRatio || 1;
+    scheduleWidth = window.innerWidth * scheduleScale;
+    scheduleHeight = window.innerHeight * scheduleScale;
+
+    scheduleCanvas.width = scheduleWidth;
+    scheduleCanvas.height = scheduleHeight;
+
+    scheduleStars.forEach(placeScheduleStar);
+  }
+
+  function stepScheduleAnimation() {
+    scheduleContext.clearRect(0, 0, scheduleWidth, scheduleHeight);
+    scheduleContext.fillStyle = "rgba(0, 0, 0, 0.2)";
+    scheduleContext.fillRect(0, 0, scheduleWidth, scheduleHeight);
+    updateScheduleStars();
+    renderScheduleStars();
+    requestAnimationFrame(stepScheduleAnimation);
+  }
+
+  function updateScheduleStars() {
+    scheduleVelocity.tx *= 0.96;
+    scheduleVelocity.ty *= 0.96;
+    scheduleVelocity.x += (scheduleVelocity.tx - scheduleVelocity.x) * 0.3;
+    scheduleVelocity.y += (scheduleVelocity.ty - scheduleVelocity.y) * 0.3;
+
+    scheduleStars.forEach((star) => {
+      star.x += scheduleVelocity.x * star.z * 1.5;
+      star.y += scheduleVelocity.y * star.z * 1.5;
+      star.x += (star.x - scheduleWidth / 2) * scheduleVelocity.z * star.z;
+      star.y += (star.y - scheduleHeight / 2) * scheduleVelocity.z * star.z;
+      star.z += scheduleVelocity.z;
+      if (
+        star.x < -SCHEDULE_OVERFLOW_THRESHOLD ||
+        star.x > scheduleWidth + SCHEDULE_OVERFLOW_THRESHOLD ||
+        star.y < -SCHEDULE_OVERFLOW_THRESHOLD ||
+        star.y > scheduleHeight + SCHEDULE_OVERFLOW_THRESHOLD
+      ) {
+        recycleScheduleStar(star);
+      }
+    });
+  }
+
+  function renderScheduleStars() {
+    scheduleStars.forEach((star) => {
+      scheduleContext.beginPath();
+      scheduleContext.lineCap = "round";
+      scheduleContext.lineWidth = SCHEDULE_STAR_SIZE * star.z * scheduleScale;
+      scheduleContext.globalAlpha = 0.5 + 0.5 * Math.random();
+      scheduleContext.strokeStyle = SCHEDULE_STAR_COLOR;
+      scheduleContext.moveTo(star.x, star.y);
+      scheduleContext.lineTo(star.x - scheduleVelocity.x * 2, star.y - scheduleVelocity.y * 2);
+      scheduleContext.stroke();
+    });
+  }
+
+  function moveSchedulePointer(x, y) {
+    if (typeof schedulePointerX === "number" && typeof schedulePointerY === "number") {
+      let ox = x - schedulePointerX,
+        oy = y - schedulePointerY;
+
+      scheduleVelocity.tx += (ox / 100) * (scheduleTouchInput ? 1 : -1);
+      scheduleVelocity.ty += (oy / 100) * (scheduleTouchInput ? 1 : -1);
+    }
+    schedulePointerX = x;
+    schedulePointerY = y;
+  }
+
+  function onScheduleMouseMove(event) {
+    scheduleTouchInput = false;
+    moveSchedulePointer(event.clientX, event.clientY);
+  }
+
+  function onScheduleTouchMove(event) {
+    scheduleTouchInput = true;
+    moveSchedulePointer(event.touches[0].clientX, event.touches[0].clientY);
+    event.preventDefault();
+  }
+
+  function onScheduleMouseLeave() {
+    schedulePointerX = null;
+    schedulePointerY = null;
+  }
+
+  console.log("Particle animation with trails added to Schedule section!");
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*** 🎬 HERO SECTION ANIMATIONS ***/
 const firstVideo = document.getElementById("first-video");
 const heroTitle = document.querySelector(".hero-title");
