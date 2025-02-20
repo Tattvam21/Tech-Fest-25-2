@@ -40,6 +40,20 @@ document.addEventListener("DOMContentLoaded", function () {
     adjustStarSize();
     resize();
   });
+
+ // Gyroscope implementation
+ window.addEventListener("deviceorientation", function (event) {
+  const tiltX = event.beta;  // Beta: Rotation around the X axis (-180 to 180 degrees)
+  const tiltY = event.gamma; // Gamma: Rotation around the Y axis (-90 to 90 degrees)
+
+  // Adjust velocity based on tilt
+  velocity.tx = tiltY / 11; // Reduced sensitivity
+  velocity.ty = tiltX / 0.5; // Reduced sensitivity
+});
+
+
+
+  
   window.addEventListener("mousemove", onMouseMove);
   canvas.addEventListener("touchmove", onTouchMove);
   canvas.addEventListener("touchend", onMouseLeave);
@@ -154,8 +168,8 @@ document.addEventListener("DOMContentLoaded", function () {
       let ox = x - pointerX,
         oy = y - pointerY;
 
-      velocity.tx += (ox / 5) * (touchInput ? 1 : -1);
-      velocity.ty += (oy / 5) * (touchInput ? 1 : -1);
+      velocity.tx += (ox / 10) * (touchInput ? 1 : -1);
+      velocity.ty += (oy / 10) * (touchInput ? 1 : -1);
     }
     pointerX = x;
     pointerY = y;
