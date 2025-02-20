@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
   /*** 🌟 STAR ANIMATION FOR EVENTS SECTION WITH TRAILS 🌟 ***/
   const STAR_COLOR = "#fff";
@@ -45,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-  
+
   window.addEventListener("mousemove", onMouseMove);
   canvas.addEventListener("touchmove", onTouchMove);
   canvas.addEventListener("touchend", onMouseLeave);
@@ -160,8 +161,8 @@ document.addEventListener("DOMContentLoaded", function () {
       let ox = x - pointerX,
         oy = y - pointerY;
 
-      velocity.tx += (ox / 10) * (touchInput ? 1 : -1);
-      velocity.ty += (oy / 10) * (touchInput ? 1 : -1);
+      velocity.tx += (ox / 100) * (touchInput ? 1 : -1);
+      velocity.ty += (oy / 100) * (touchInput ? 1 : -1);
     }
     pointerX = x;
     pointerY = y;
