@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Adjust velocity based on tilt
   velocity.tx = tiltY / 11; // Reduced sensitivity
-  velocity.ty = tiltX / 0.5; // Reduced sensitivity
+  velocity.ty = tiltX / 10; // Reduced sensitivity
 });
 
 
