@@ -571,6 +571,7 @@ body {
 
 /* Schedule Section */
 .schedule-section {
+  position: relative;
   min-height: 90vh;
   display: flex;
   flex-direction: column;
@@ -579,7 +580,20 @@ body {
   padding: 60px 20px;
   box-sizing: border-box;
   background-color: #111827; /* Darker navy schedule background */
+  overflow: hidden;
 }
+
+#schedule-animation{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 1;
+  pointer-events: none;
+}
+
 
 .schedule-section h2 {
   font-size: 3em;
@@ -779,6 +793,8 @@ body {
   text-align: center;
   box-sizing: border-box;
   background-color: #111827; /* Darker navy sponsor section */
+  overflow: hidden;
+  position: relative;
 }
 
 .sponsors h2 {
@@ -806,6 +822,7 @@ body {
   height: auto;
   border-radius: 8px; /* Rounded sponsor logos */
   transition: 0.2s linear;
+  opacity: 1;
   
 }
 
